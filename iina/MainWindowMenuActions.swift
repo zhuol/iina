@@ -47,7 +47,7 @@ extension MainWindowController {
   }
 
   @IBAction func menuJumpTo(_ sender: NSMenuItem) {
-    let _ = Utility.quickPromptPanel(messageText: "Jump to:", informativeText: "Example: 20:35") { input in
+    let _ = Utility.quickPromptPanel("jump_to") { input in
       if let vt = VideoTime(input) {
         self.playerCore.seek(absoluteSecond: Double(vt.second))
       }
@@ -207,6 +207,7 @@ extension MainWindowController {
     //  10: smaller size
     //  11: bigger size
     let size = sender.tag
+    guard !isInFullScreen else { return }
     guard let w = window, var vw = playerCore.info.displayWidth, var vh = playerCore.info.displayHeight else { return }
     if vw == 0 { vw = AppData.widthWhenNoVideo }
     if vh == 0 { vh = AppData.heightWhenNoVideo }
@@ -290,7 +291,7 @@ extension MainWindowController {
   }
 
   @IBAction func menuLoadExternalSub(_ sender: NSMenuItem) {
-    let _ = Utility.quickOpenPanel(title: "Load external subtitle file", isDir: false) { url in
+    Utility.quickOpenPanel(title: "Load external subtitle file", isDir: false) { url in
       self.playerCore.loadExternalSubFile(url)
     }
   }
@@ -328,18 +329,18 @@ extension MainWindowController {
 
   @IBAction func menuSetSubEncoding(_ sender: NSMenuItem) {
     playerCore.setSubEncoding((sender.representedObject as? String) ?? "auto")
+    playerCore.reloadAllSubs()
   }
 
   @IBAction func menuSubFont(_ sender: NSMenuItem) {
     Utility.quickFontPickerWindow() {
       self.playerCore.setSubFont($0 ?? "")
     }
-
   }
 
   @IBAction func menuFindOnlineSub(_ sender: NSMenuItem) {
     guard let url = playerCore.info.currentURL else { return }
-    OnlineSubtitle.getSub(forFile: url) { subtitles in
+    OnlineSubtitle.getSub(forFile: url, playerCore: playerCore) { subtitles in
       // send osd in main thread
       self.playerCore.sendOSD(.foundSub(subtitles.count))
       // download them
@@ -393,10 +394,10 @@ extension MainWindowController {
   }
   
   @IBAction func menuSavePlaylist(_ sender: NSMenuItem) {
-    let _ = Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) {
-      (url) in if url.isFileURL {
+    Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) { (url) in
+      if url.isFileURL {
         var playlist = ""
-        for item in playerCore.info.playlist {
+        for item in self.playerCore.info.playlist {
           playlist.append((item.filename + "\n"))
         }
         
@@ -421,4 +422,10 @@ extension MainWindowController {
     }
   }
 
+  @IBAction func menuOpenHistory(_ sender: NSMenuItem) {
+    guard let url = sender.representedObject as? URL else { return }
+    playerCore.playFile(url.path)
+    // FIXME: this line shouldn't be here
+    playerCore.info.isNetworkResource = url.isFileURL
+  }
 }

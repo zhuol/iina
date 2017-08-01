@@ -59,8 +59,8 @@
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
 "9zk-co-roT.title" = "ダウンロードした字幕を保存";
 
-/* Class = "NSMenuItem"; title = "Github"; ObjectID = "A9w-iE-gVg"; */
-"A9w-iE-gVg.title" = "Github";
+/* Class = "NSMenuItem"; title = "GitHub"; ObjectID = "A9w-iE-gVg"; */
+"A9w-iE-gVg.title" = "GitHub";
 
 /* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "メインメニュー";
@@ -370,3 +370,7 @@
 
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
 "yHI-7D-OaI.title" = "インターレース解除";
+
+"0os-i1-tJF.title" = "IINAをデフォルトのアプリケーションに設定…";
+
+"LND-1n-DU2.title" = "再生履歴";

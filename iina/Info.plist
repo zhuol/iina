@@ -165,6 +165,8 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ts</string>
+				<string>mts</string>
+				<string>m2ts</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>doc_ts.icns</string>
@@ -308,6 +310,8 @@
 				<string>swf</string>
 				<string>xvid</string>
 				<string>yuv</string>
+				<string>dv</string>
+				<string>wv</string>
 				<string>*</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
@@ -335,11 +339,31 @@
 				<string>midi</string>
 				<string>pcm</string>
 				<string>vox</string>
+				<string>tta</string>
+				<string>tak</string>
+				<string>opus</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>doc_other_a.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>Audio file</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>m3u8</string>
+				<string>m3u</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_list.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Playlist</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSTypeIsPackage</key>
@@ -361,7 +385,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.8</string>
+	<string>0.0.12</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -376,7 +400,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>20</string>
+	<string>34</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.video</string>
 	<key>LSMinimumSystemVersion</key>
@@ -387,7 +411,27 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>Text Drop</string>
+			</dict>
+			<key>NSMessage</key>
+			<string>droppedText</string>
+			<key>NSSendTypes</key>
+			<array>
+				<string>NSStringPboardType</string>
+			</array>
+		</dict>
+	</array>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
 	<true/>
+	<key>SUFeedURL</key>
+	<string>https://www.iina.io/appcast.xml</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>dsa_pub.pem</string>
 </dict>
 </plist>
